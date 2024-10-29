@@ -1,47 +1,56 @@
 <script>
-  import svelteLogo from './assets/svelte.svg'
-  import viteLogo from '/vite.svg'
-  import Counter from './lib/Counter.svelte'
+  import Router from 'svelte-routing/src/Router.svelte';
+  import Link from 'svelte-routing/src/Link.svelte';
+  import Route from 'svelte-routing/src/Route.svelte';
+  import Inventario from "./views/pages/Inventario.svelte";
+  export let url = "";
 </script>
 
-<main>
-  <div>
-    <a href="https://vite.dev" target="_blank" rel="noreferrer">
-      <img src={viteLogo} class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank" rel="noreferrer">
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
+<Router {url}>
+  <div class="flex h-screen">
+    <!-- Sidebar/Navegación -->
+    <nav class="w-16 bg-[#303F33] min-h-screen text-white fixed left-0 top-0">
+      <div class="flex flex-col items-center py-4">
+        <!-- Logo -->
+        <div class="mb-8">
+          <img src="/logo.svg" alt="Logo" class="w-8 h-8" />
+        </div>
+        
+        <!-- Enlaces de navegación -->
+        <Link 
+          to="/inventario" 
+          class="p-2 rounded-lg hover:bg-[#4A5F4E] transition-colors mb-4"
+        >
+          <span class="text-xl">📦</span>
+        </Link>
+
+        <Link 
+          to="/usuarios" 
+          class="p-2 rounded-lg hover:bg-[#4A5F4E] transition-colors mb-4"
+        >
+          <span class="text-xl">👥</span>
+        </Link>
+
+        <Link 
+          to="/reportes" 
+          class="p-2 rounded-lg hover:bg-[#4A5F4E] transition-colors mb-4"
+        >
+          <span class="text-xl">📊</span>
+        </Link>
+      </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main class="flex-1 pl-16">
+      <Route path="/" component={Inventario} />
+      <Route path="/inventario" component={Inventario} />
+    </main>
   </div>
-  <h1>Vite + Svelte</h1>
-
-  <div class="card">
-    <Counter />
-  </div>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!
-  </p>
-
-  <p class="read-the-docs">
-    Click on the Vite and Svelte logos to learn more
-  </p>
-</main>
+</Router>
 
 <style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
+  :global(body) {
+    margin: 0;
+    padding: 0;
   }
 </style>
