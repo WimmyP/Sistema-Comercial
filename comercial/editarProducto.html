@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Producto</title>
+    <style>
+        /* Estilos para el modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: #d3d3d3;
+            margin: 15% auto;
+            padding: 20px;
+            width: 500px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .modal-title {
+            background-color: #c0c0c0;
+            padding: 10px;
+            margin: -20px -20px 20px -20px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        /* Estilos para el formulario */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: white;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Estilos para los botones */
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+            margin: 0 10px;
+            width: 120px;
+        }
+
+        .btn-save {
+            background-color: darkgreen;
+        }
+
+        .btn-cancel {
+            background-color: #800000;
+        }
+
+        /* Botón para abrir el modal */
+        .btn-editar {
+            background-color: #FFA500;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Botón para abrir el modal -->
+<button class="btn-editar" onclick="openModal()">Editar</button>
+
+<!-- El Modal -->
+<div id="editarProductoModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-title">
+            <h2>EDITAR PRODUCTO</h2>
+        </div>
+
+        <form id="editarProductoForm">
+            <!-- Primera fila: ID Producto y Nombre -->
+            <div class="form-row">
+                <div style="flex: 1;">
+                    <label for="idProducto">ID producto</label>
+                    <input type="text" id="idProducto" name="idProducto" readonly>
+                </div>
+                <div style="flex: 2;">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre">
+                </div>
+            </div>
+
+            <!-- Descripción -->
+            <div class="form-group">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" name="descripcion"></textarea>
+            </div>
+
+            <!-- Última fila: Categoría, Cantidad y Estado -->
+            <div class="form-row">
+                <div style="flex: 1;">
+                    <label for="categoria">CATEGORIA</label>
+                    <select id="categoria" name="categoria">
+                        <option value="">Seleccionar</option>
+                        <option value="1">Categoría 1</option>
+                        <option value="2">Categoría 2</option>
+                    </select>
+                </div>
+                <div style="flex: 1;">
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number" id="cantidad" name="cantidad">
+                </div>
+                <div style="flex: 1;">
+                    <label for="estado">Estado</label>
+                    <input type="text" id="estado" name="estado">
+                </div>
+            </div>
+
+            <!-- Botones -->
+            <div class="button-container">
+                <button type="submit" class="btn btn-save">Guardar</button>
+                <button type="button" class="btn btn-cancel" onclick="closeModal()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Funciones para manejar el modal
+    function openModal() {
+        document.getElementById('editarProductoModal').style.display = 'block';
+        // Aquí puedes cargar los datos del producto a editar
+        cargarDatosProducto();
+    }
+
+    function closeModal() {
+        document.getElementById('editarProductoModal').style.display = 'none';
+    }
+
+    // Función para cargar los datos del producto (ejemplo)
+    function cargarDatosProducto() {
+        // Aquí deberías cargar los datos reales del producto
+        document.getElementById('idProducto').value = "PROD001";
+        document.getElementById('nombre').value = "Producto Ejemplo";
+        document.getElementById('descripcion').value = "Descripción del producto";
+        document.getElementById('categoria').value = "1";
+        document.getElementById('cantidad').value = "10";
+        document.getElementById('estado').value = "Activo";
+    }
+
+    // Cerrar el modal si se hace clic fuera de él
+    window.onclick = function(event) {
+        const modal = document.getElementById('editarProductoModal');
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+
+    // Manejar el envío del formulario
+    document.getElementById('editarProductoForm').onsubmit = function(e) {
+        e.preventDefault();
+        // Aquí puedes agregar la lógica para actualizar el producto
+        console.log('Producto actualizado');
+        closeModal();
+    }
+</script>
+
+</body>
+</html>

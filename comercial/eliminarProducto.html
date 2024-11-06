@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Producto</title>
+    <style>
+        /* Estilos para el modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            width: 400px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .modal-icon {
+            color: #ff0000;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .modal-message {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        /* Estilos para los botones */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 120px;
+            color: white;
+        }
+
+        .btn-confirm {
+            background-color: #dc3545;
+        }
+
+        .btn-cancel {
+            background-color: #6c757d;
+        }
+
+        /* Botón para abrir el modal */
+        .btn-eliminar {
+            background-color: #dc3545;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Botón para abrir el modal -->
+<button class="btn-eliminar" onclick="openModal()">Eliminar</button>
+
+<!-- El Modal -->
+<div id="eliminarProductoModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-icon">⚠️</div>
+        <div class="modal-message">
+            <h3>¿Está seguro de eliminar este producto?</h3>
+            <p>Esta acción no se puede deshacer.</p>
+        </div>
+        <div class="button-container">
+            <button class="btn btn-confirm" onclick="confirmarEliminacion()">Eliminar</button>
+            <button class="btn btn-cancel" onclick="closeModal()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Funciones para manejar el modal
+    function openModal() {
+        document.getElementById('eliminarProductoModal').style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('eliminarProductoModal').style.display = 'none';
+    }
+
+    function confirmarEliminacion() {
+        // Aquí puedes agregar la lógica para eliminar el producto
+        console.log('Producto eliminado');
+        closeModal();
+    }
+
+    // Cerrar el modal si se hace clic fuera de él
+    window.onclick = function(event) {
+        const modal = document.getElementById('eliminarProductoModal');
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+</script>
+
+</body>
+</html>
